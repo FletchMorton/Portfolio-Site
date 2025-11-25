@@ -1,0 +1,31 @@
+
+.rain-box {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.rain-div span {
+    position: absolute;
+    background-image: linear-gradient(to bottom, transparent, grey);
+    opacity: var(--opacity);
+    border-radius: 4px;
+    margin-top: -150px;
+    
+    left: var(--position);
+    width: var(--width);
+    height: var(--height);
+    
+    animation: rain var(--duration) linear infinite;
+    animation-delay: var(--delay);
+}
+
+
+@keyframes rain {
+    from {
+        transform: translateY(-150px);
+    } to {
+        transform: translateY(calc(100vh + 150px));
+    }
+}

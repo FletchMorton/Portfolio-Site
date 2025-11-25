@@ -1,0 +1,240 @@
+
+/*About Section*/
+
+.about {
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about .about-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10rem;
+}
+
+.info-box {
+    display: flex;
+    flex-direction: column; /*Stacks them*/
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+.info-box h1 {
+    font-family: Impact;
+    font-size: 4.5rem;
+    font-weight: 300;
+    text-shadow: 30px 30px 50px black;
+}
+
+.socials {
+    display: flex;
+    gap: 2rem;
+}
+.socials i {
+    border-radius: 1000rem;
+    background-color: transparent;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+.socials i:hover {
+  z-index: 0;
+  box-shadow: 0 0 55px 5px #e100ff;
+}
+/* #resume-icon {
+    font-size: 2rem;
+    transform: translateY(15%);
+} */
+
+.divider {
+    position: relative;
+}
+.divider:before {
+    content:'';
+    position: absolute;
+    background-image: linear-gradient(to left, grey, transparent 75%);
+    padding: 0.08vh 10vw;
+   transform: translateX(-98%);
+}
+.divider:after {
+    content:'';
+    position: absolute;
+    background-image: linear-gradient(to right, grey, transparent 75%);
+    padding: 0.08vh 10vw;
+   transform: translateX(2%);
+}
+
+
+.blurb-text {
+    width: 70%;
+    text-align: left;
+}
+.blurb-text p {
+    margin-bottom: 1rem;
+}
+
+
+/*Project Section*/
+
+.projects {
+    padding-bottom: 30rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 3.25rem;
+    font-weight: 200;
+    margin-bottom: 1rem;
+}
+
+#subdivider {
+    padding-bottom: 5rem;
+}
+#subdivider:before {
+    padding: 0.08vh 5vw;
+    left: 50%;
+    transform: translateX(-95%);
+}
+#subdivider:after {
+    padding: 0.08vh 5vw;
+    left: 50%;
+    transform: translateX(5%);
+}
+
+.project-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15rem;
+}
+
+.grid-card {
+    background-color: rgba(24, 24, 24, 0.5);
+    backdrop-filter: blur(6px);
+    box-shadow: 0px 0 20px black;
+    border-radius: 3rem;
+    padding: 3rem;
+    display: flex;
+    flex-direction: row;
+    gap: 11vw;
+    align-items: center;
+    cursor: default;
+}
+.grid-card p {
+    width: 34vw;
+    padding-right: 5vw;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+}
+
+.grid-card span {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.grid-card-pane {
+    display: flex;
+    flex-direction: column;
+}
+
+.rect-img {
+    width: 25vw;
+    margin: 1rem;
+    box-shadow: 0px 0 20px black;
+}
+
+.sqr-img {
+    width: 15vw;
+    margin: 1rem;
+    box-shadow: 0px 0 20px black;
+}
+
+
+
+
+/* Responsive Design */
+
+@media(max-width:2000px){
+    .input-box input {
+        width: 50vw; /*This is a increase from 40vw*/
+        padding: 0.5rem 1.25rem; /*This is a decrease from 0.75rem 1.5rem*/
+        font-size: 0.9rem;
+    }
+    .rect-img {
+        width: 27vw;
+    }
+    .sqr-img {
+        width: 17vw;
+    }
+}
+
+@media(max-width:1280px) {
+    .about .about-container {
+        gap: 5rem; /*This is a decrease from 10rem*/
+    }
+    .project-container {
+        flex-direction: column;
+    }
+    .rect-img {
+        width: 30vw; /*This is an increase from 25vw*/
+    }
+    .sqr-img {
+        width: 20vw; /*This is an increase from 15vw*/
+    }
+}
+
+@media(max-width:768px) {
+    .info-box h1 {
+        font-size: 3rem; /*This is a decrease from 4.5rem*/
+    }
+    .section-title {
+        font-size: 2.75rem; /*This is a decrease from 3.5rem*/
+        font-weight: 300; /*This is a increase from 200*/
+    }
+    .about .about-container {
+        gap: 3rem;
+    }
+    .grid-card {
+        flex-direction: column;
+    }
+   .rect-img {
+        width: 50vw; /*This is an increase from 25vw*/
+    }
+    .sqr-img {
+        width: 40vw; /*This is an increase from 15vw*/
+    }
+   .grid-card p {
+        width: 45vw; /*from 34vw*/
+        padding-right: 3vw; /*from 5vw*/
+    }
+}
+
+@media(max-width:600px) {
+    .about-container {
+        flex-direction: column;
+    }
+   .info-box h1 {
+        font-size: 2.25rem; /*This is a decrease from 4.5rem*/
+    }
+    .section-title {
+        font-size: 2.25rem; /*This is a decrease from 3.5rem*/
+        font-weight: 300; /*This is a increase from 200*/
+    }
+    .grid {
+        gap: 7rem;
+    }
+    .grid-card p {
+        width: 50vw; /*from 34vw*/
+        padding-right: 0vw; /*from 5vw*/
+    }
+}

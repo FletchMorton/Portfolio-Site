@@ -1,0 +1,77 @@
+.modal, .blurring {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.modal-content {
+    background: #1f1f1f;
+    max-width: 37.5rem;
+    max-height: 39rem;
+    top: 38.85%;
+    left: 48.3%;
+    transform: translate(-50%, -50%);
+    padding: 1.85rem 1.75rem;
+    border-radius: 1.25rem;
+    position: absolute;
+    overflow-y: scroll;
+    margin: 3rem;
+}
+
+.modal-content h3 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-content p {
+  margin-bottom: 1rem;
+}
+
+.help-modal-ico-wrapper {
+  text-align: center;
+}
+
+.help-modal-ico {
+  width: 5rem;
+  margin: 1rem 1rem;
+}
+
+.command-pane {
+  max-width: 100%;
+  padding: 17px 15px;
+  background: #181818;
+  border-radius: 20px;
+  color: #e100ff;
+}
+
+.blurring {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.help {
+  position: fixed;
+  bottom: 1%;
+  left: 0.5%;
+  border-radius: 1000px;
+  border: none;
+  height: 1.75rem;
+  width: 1rem;
+  background-color: transparent;
+}
+
+.help img {
+  border-radius: 1000px;
+  height: 1.75rem;
+  width: 1.75rem;
+  translate: -10% -5%;
+}
+
+.help img:hover {
+  z-index: 0;
+  box-shadow: 5px 0 25px #008cff, -5px 0 25px #e100ff;
+}

@@ -1,0 +1,143 @@
+
+/*Main Section*/
+
+.dock {
+    padding: 30vh 12%;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.5rem;
+    margin-top: 5rem;
+}
+
+.clock {
+    text-align: center;
+    font-size: 5.5rem;
+    font-weight: 200;
+    margin-bottom: 0rem;
+}
+
+.date-text {
+    margin-bottom: 2rem;
+}
+
+.input {
+    position: relative; /*so we can position the icon relative to its parent element*/
+    margin-bottom: 2.5rem;
+}
+
+.input-box input {
+    outline: none;
+    border-radius: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0px 0 20px #e100ff;
+    animation: lightpulse 5s infinite;
+    padding: 0.5rem 1.5rem;
+    width: 40vw;
+    font-size: 1rem;
+    color: #e100ff;
+    text-align: left;
+}
+@keyframes lightpulse {
+  50% {box-shadow: 0px 0px 40px #e100ff}
+}
+
+
+.input img {
+    position: absolute;
+    width: 2.5rem;
+    top: 50%;
+    left: -20px;
+    transform: translate(-100%, -50%);
+} 
+
+
+.btn {
+  border-radius: 1000px;
+  border: none;
+  padding: 0.7rem 1.7rem;
+  color: #f0f0f0;
+  background-color: #161a20;
+  text-wrap: nowrap;
+  position: relative;
+  cursor: default;
+}
+.btn:after {
+  content: attr(data-text);
+  position: absolute;
+  border-radius: 1000px;
+  background-image: linear-gradient(to bottom right, #008cff, #e100ff);
+  padding: 0.9rem 1.9rem;
+  top: -8%;
+  left: -3%;
+  z-index: -1;
+}
+.btn:hover {
+  z-index: 0;
+  box-shadow: 40px 0 100px #008cff, -40px 0 100px #e100ff;
+}
+
+
+.help-card.open {
+    display: none;
+}
+
+
+
+/* Responsive Design */ 
+
+@media(max-width:2500px){
+    .input-box input {
+        width: 45vw; /*This is a increase from 40vw*/
+        padding: 0.5rem 1.25rem; /*This is a decrease from 0.75rem 1.5rem */
+        font-size: 0.9rem;
+    }
+}
+
+@media(max-width:2000px){
+    .dock {
+        padding: 20vh 12%;
+    }   
+    .input-box input {
+        width: 50vw; /*This is a increase from 40vw*/
+        padding: 0.5rem 1.25rem; /*This is a decrease from 0.75rem 1.5rem */
+        font-size: 0.9rem;
+    }
+}
+
+@media(max-width:1280px) {
+    .dock {
+        padding: 20vh 12%;
+    }   
+    .input-box input {
+        width: 60vw; /*This is a increase from 40vw */
+    }
+    .input-box img {
+        width: 2rem;
+    }
+}
+
+@media(max-width:768px) {
+    .dock {
+        padding: 5vh 12%;
+    }   
+    .input-box input {
+        width: 70vw;
+    }
+    .input-box img {
+        display: none;
+    }
+    .clock {
+        line-height: 1;
+    }
+}
+
+@media(max-width:600px) {}
