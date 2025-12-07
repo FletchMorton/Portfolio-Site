@@ -100,7 +100,7 @@ function Portfolio() {
 
               <div className="grid-card-pane">
                 <span>Polysearch Engine</span>
-                   <p>I use several different search engines throughout the day depending on what I'm searching for; to alleviate myself the task of manually switching engines through a url, search tag, or browser configuration, I created the <a href='localhost:5173/#search'>search page</a> of this website in order to allow myself to switch engines at the press of a button.</p>
+                   <p>I use several different search engines throughout the day depending on what I'm searching for; to alleviate myself the task of manually switching engines through a url, search tag, or browser configuration, I created the <a href='https://fletchmorton.github.io/Portfolio-Site/#search'>search page</a> of this website in order to allow myself to switch engines at the press of a button.</p>
                    <p>I also hard coded some commands into the app so that I may conveniently execute certain functions simply by typing in specific keywords preceeded by the '/' symbol, such as setting a timer, or redirecting straight to a specific website.</p>
                    <p>Despite the fact the polysearch engine in its current state is used solely for personal needs and demonstration purposes, I see the potential it has as a more public-facing site - allowing users to specify which search engines should be included in the engine swapper, and what commands can be recognized by the application.</p>
               </div>
