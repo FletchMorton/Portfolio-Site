@@ -200,6 +200,9 @@ function Home() {
 
                   setInput("");
                 
+                } else if(e.key == "Tab") {
+                  e.preventDefault();
+                  e.swapEngine();
                 }}}
             />
             <img className='smarker' src={smarker}></img>
