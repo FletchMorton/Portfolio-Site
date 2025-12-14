@@ -161,6 +161,7 @@ function Search() {
           <div className="input">
             <input
                 ref={inputRef}
+                autoFocus='true'
                 type='text'
                 value={input}
                 onChange={e=>setInput(e.target.value)} /* when the user enters something, update the input value with the event "e" */
@@ -175,8 +176,7 @@ function Search() {
                       window.location.href = "https://proton.me/";
                     break;
 
-                    case "/youtube":
-                    case "/youtueb":
+                    case "/yout":
                       window.location.href = "https://youtube.com";
                     break;
 
@@ -197,13 +197,24 @@ function Search() {
                     break;
                   
                     default:
+                      
+                      //Timer recognized
                       if(input.substring(0, 6) == "/timer") startTimer(input.substring(7));
+                      
+                      //Url recognized
+                      else if(input[0] == '@') window.location.href = "https://" + input.substring(1) + "/";
+                      
+                      //Search normally
                       else window.location.href = (url + input.replaceAll(" ", "+"));
-                    break;
+                    
+                      break;
                     }
 
                   setInput("");
                 
+                } else if(e.key == "Tab") {
+                  e.preventDefault();
+                  e.swapEngine();
                 }}}
             />
             <img className='smarker' src={smarker}></img>
