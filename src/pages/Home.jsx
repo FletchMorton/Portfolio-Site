@@ -202,7 +202,7 @@ function Home() {
                 
                 } else if(e.key == "Tab") {
                   e.preventDefault();
-                  e.swapEngine();
+                  swapEngine();
                 }}}
             />
             <img className='smarker' src={smarker}></img>
