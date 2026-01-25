@@ -33,7 +33,7 @@ export default function modal() {
 
                     <div className='command-pane'>
                         <p> <i>/timer hh mm ss</i> - sets a timer for the specified time</p>
-                        <p> <i>/youtube</i> - launch Youtube</p>
+                        <p> <i>/yout</i> - launch Youtube</p>
                         <p><i>/proton</i> - launch ProtonMail</p>
                         <p><i>/tuta</i> - launch Tuta Mail</p>
                         <p><i></i></p>
