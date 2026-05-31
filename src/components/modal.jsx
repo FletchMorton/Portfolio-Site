@@ -1,43 +1,72 @@
-import { useEffect, useState, useRef } from 'react'
+import { createContext, useContext, useState } from 'react'
 import './modal.css'
 import helpicon from '../assets/help.png'
 
-export default function modal() {
 
-    /* Hide on launch */
-    const [modal, setModal] = useState(false);
+//createContext lets you create a context that components can provide or read.
+//Context lets the parent component make some information available to any component in the tree below it without passing it explicitly through props
+const ModalContext = createContext();
 
-    const toggleModal = () => { setModal(!modal); }
+// Provider to wrap 
+export function ModalProvider({children}) {
+
+    /* Default values */
+    const [modal, setModal] = useState({isOpen: false, title: "", message: "", iconVisible: false, cmdVisable: false});
+
+    /* Load the passed contents of the module */
+    const loadModal = ({title, message, showIcon, showCmd}) => {
+        setModal({isOpen: true, title, message, iconVisible: showIcon, cmdVisable: showCmd});
+    };
+
+    const closeModal = () => { setModal({isOpen: false, title: "", message: "", iconVisible: false, cmdVisable: false})};
 
     return(
         <>
-        <button className="help" onClick={toggleModal}>
-            <img src={helpicon}></img>
-        </button>
-        
+        <ModalContext.Provider value={{modal, loadModal, closeModal}}>
+            {children}
+            <Modal />
+        </ModalContext.Provider>
+        </>
+    );
+}
+
+//Modal UI
+function Modal() {
+
+    const {modal, loadModal, closeModal} = useModal();
+
+    return(
+        <>
         {/* Return if modal true */}
-        {modal && (
+        {modal.isOpen && (
 
             <div className="modal">
-                <div className="blurring" onClick={toggleModal}></div>
+                <div className="blurring" onClick={closeModal}></div>
 
                 <div className="modal-content">
+                    
+                    {/* Graphic */}
+                    {modal.iconVisible && (
                     <div className="help-modal-ico-wrapper">
                         <img className='help-modal-ico' src={helpicon}></img>
                     </div>
+                    )}
                     
-                    <h3>Information</h3>
-                    <p>This is a poly-search page allowing the user to run searches across a multitude of different search engines all from one location.</p>
-                    <p>Click the button beneath the search bar to swtich search engines before typing your query into the search box and pressing Enter.</p>
-                    <p>Several commands - deliniated by the '/' symbol - are also recognized by the search bar, some of which are listed below:</p>
+                    {modal.title && <h3>{modal.title}</h3>}
+                    {modal.message && <p style={{whiteSpace: "pre-line"}}>{modal.message}</p>}
 
-                    <div className='command-pane'>
-                        <p> <i>/timer hh mm ss</i> - sets a timer for the specified time</p>
-                        <p> <i>/yout</i> - launch Youtube</p>
-                        <p><i>/proton</i> - launch ProtonMail</p>
-                        <p><i>/tuta</i> - launch Tuta Mail</p>
-                        <p><i></i></p>
-                    </div>
+                    {modal.cmdVisable && (
+                        <div className='command-pane'>
+                            <p> <i>/timer hh mm ss</i> - sets a timer for the specified time</p>
+                            <p> <i>/yout</i> - launch Youtube</p>
+                            <p><i>/proton</i> - launch ProtonMail</p>
+                            <p><i>/tuta</i> - launch Tuta Mail</p>
+                            <p><i>/crono</i> - launch Cronometer</p>
+                            <p><i>/trans</i> - launch Google Translate</p>
+                            <p><i>/maps</i> - launch Google Maps</p>
+                            <p><i></i></p>
+                        </div>
+                    )}
                         
                 </div>
             </div>
@@ -45,6 +74,7 @@ export default function modal() {
         )}
         </>
     );
-
-
 }
+
+//Hook
+export function useModal() { return useContext(ModalContext); }

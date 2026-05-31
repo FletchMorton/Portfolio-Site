@@ -1,19 +1,23 @@
 import { useEffect, useState, useRef } from 'react'
+import { useModal } from '../components/modal.jsx'
 import './Search.css'
+import alarm from '../assets/alarm.mp3'
 import smarker from '../assets/marker.png'
 import Rain from '../components/rain.jsx'
 
 function Home() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const [input, setInput] = useState("");
-  const [engine, setEngine] = useState('PrivAU');
-  const [url, setUrl] = useState('https://priv.au/search?q=');
+  const [engine, setEngine] = useState('Startpage');
+  const [url, setUrl] = useState('https://www.startpage.com/sp/search?query=');
   const [currentDate, setCurrentDate] = useState('');
   const [currentTime, setCurrentTime] = useState('');
   const [timer, setTimer] = useState(-1);
 
   const inputRef = useRef();
   const timerRef = useRef(timer);
+
+  const { loadModal } = useModal();
 
   function isNumeric(value){ return /^\d+$/.test(value); }
 
@@ -48,17 +52,26 @@ function Home() {
       else setCurrentTime(timeToStr(timerRef.current));
     };
 
+    /*Tick Timer*/
     const updateTimer = () =>
     {
       const currentTimer = timerRef.current;
       if(currentTimer >= 0) {
-          setTimer((currentTimer) => currentTimer - 1); 
+
+        setTimer((currentTimer) => currentTimer - 1);
 
         if(currentTimer == 0) {
           setTimer(-1);
-          window.alert("Your Timer Has Ended.");
-          /* noise */
-        };
+          new Audio(alarm).play();
+          //Trigger Alarm Pop Up
+            loadModal({
+              title: "Your Timer Has Ended",
+              message: "",
+              showIcon: true,
+              showCmd: false
+            });
+        }
+      
       } else if(currentTimer < -1) {
           setTimer(-1);
           window.alert("Incorrect formatting. List your time as hh mm ss.");
@@ -77,27 +90,37 @@ function Home() {
     {
       setCount((count) => count + 1);
 
-      switch(count) {
+   switch(count) {
         case 0:
-          setEngine("RhsczEU");
-          setUrl('https://search.rhscz.eu/search?q=');
-        break;
-
-        case 1:
           setEngine("Startpage");
           setUrl('https://www.startpage.com/sp/search?query=');
         break;
 
+        case 1:
+          setEngine("PrivAU");
+          setUrl('https://priv.au/search?q=');
+        break;
+
         case 2:
+          setEngine("RhsczEU");
+          setUrl('https://search.rhscz.eu/search?q=');
+        break;
+
+        case 3:
+          setEngine("YouTube");
+          setUrl('https://www.youtube.com/results?search_query=');
+        break;
+
+        case 4:
           setEngine("Google");
           setUrl('https://www.google.com/search?q=');
         break;
 
-        case 3:
+        case 5:
           setCount((count) => 0);
-          setEngine("PrivAU");
-          setUrl('https://priv.au/search?q=');
-        break;
+          setEngine("Yandex");
+          setUrl('https://yandex.com/search/?text=')
+          break;
 
         default:
           setEngine("ERROR");
@@ -138,7 +161,7 @@ function Home() {
 
   return (
     <>
-    <head><title>Home</title></head>
+    <title>Home</title>
       <section className='dock' id='dock'>
         <div className='rain-container'><Rain /></div>
         <div className="input-box">
@@ -182,6 +205,10 @@ function Home() {
 
                     case "/crono":
                       window.location.href = "https://cronometer.com/";
+                    break;
+
+                    case "/maps":
+                      window.location.href = "https://maps.google.com/";
                     break;
                   
                     default:

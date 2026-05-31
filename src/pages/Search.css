@@ -87,8 +87,31 @@
 }
 
 
-.help-card.open {
-    display: none;
+.help-button {
+  position: fixed;
+  bottom: 1%;
+  left: 0.5%;
+  border-radius: 1000px;
+  border: none;
+  height: 1.75rem;
+  width: 1rem;
+}
+
+.help-button button {
+    background-color: transparent;
+    border: none;
+}
+
+.help-button img {
+  border-radius: 1000px;
+  height: 1.75rem;
+  width: 1.75rem;
+  translate: 0% 5%;
+}
+
+.help-button img:hover {
+  z-index: 0;
+  box-shadow: 5px 0 25px #008cff, -5px 0 25px #e100ff;
 }
 
 

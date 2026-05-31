@@ -1,14 +1,16 @@
 import { useEffect, useState, useRef } from 'react'
 import './Search.css'
 import smarker from '../assets/marker.png'
-import Modal from '../components/modal.jsx'
+import alarm from '../assets/alarm.mp3'
+import { useModal } from '../components/modal.jsx'
 import Rain from '../components/rain.jsx'
+import helpicon from '../assets/help.png'
 
 function Search() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const [input, setInput] = useState("");
-  const [engine, setEngine] = useState('PrivAU');
-  const [url, setUrl] = useState('https://priv.au/search?q=');
+  const [engine, setEngine] = useState('Startpage');
+  const [url, setUrl] = useState('https://www.startpage.com/sp/search?query=');
   const [currentDate, setCurrentDate] = useState('');
   const [currentTime, setCurrentTime] = useState('');
   const [timer, setTimer] = useState(-1);
@@ -16,7 +18,9 @@ function Search() {
   const inputRef = useRef();
   const timerRef = useRef(timer);
 
-  function isNumeric(value){ return /^\d+$/.test(value); }
+  const { loadModal } = useModal();
+
+  function isNumeric(value) { return /^\d+$/.test(value); }
 
   function timeToStr(value)
   {
@@ -32,10 +36,29 @@ function Search() {
         return(hours+":"+minutes+":"+seconds);
   }
 
+  {/* Help Icon */}
+  function HelpPopUp() {
+    
+    return(
+      <div className="help-button">
+          <button onClick={() => loadModal({
+      
+            title: "Information",
+            message: "This is a metasearch engine allowing users to run searches across a multitude of different search engines all from one location.\n\nClick the button beneath the search bar to swtich search engines before typing your query into the search box and pressing Enter.\n\nSeveral commands - deliniated by the '/' symbol - are also recognized by the search bar, and are documented below:",
+            showIcon: true,
+            showCmd: true
+          
+          })}><img src={helpicon}></img></button>
+      </div>
+    );
+  }
+
+
   {/*Track timer duration*/}
   useEffect(() => {
     timerRef.current = timer;
   }, [timer]);
+
 
   {/*Focus on the reference as soon as the page loads*/}
   useEffect(()=>{
@@ -50,17 +73,26 @@ function Search() {
       else setCurrentTime(timeToStr(timerRef.current));
     };
 
+    /*Tick Timer*/
     const updateTimer = () =>
     {
       const currentTimer = timerRef.current;
       if(currentTimer >= 0) {
-          setTimer((currentTimer) => currentTimer - 1); 
+
+        setTimer((currentTimer) => currentTimer - 1);
 
         if(currentTimer == 0) {
           setTimer(-1);
-          window.alert("Your Timer Has Ended.");
-          /* noise */
-        };
+          new Audio(alarm).play();
+          //Trigger Alarm Pop Up
+            loadModal({
+              title: "Your Timer Has Ended",
+              message: "",
+              showIcon: true,
+              showCmd: false
+            });
+        }
+      
       } else if(currentTimer < -1) {
           setTimer(-1);
           window.alert("Incorrect formatting. List your time as hh mm ss.");
@@ -81,30 +113,42 @@ function Search() {
 
       switch(count) {
         case 0:
-          setEngine("RhsczEU");
-          setUrl('https://search.rhscz.eu/search?q=');
-        break;
-
-        case 1:
           setEngine("Startpage");
           setUrl('https://www.startpage.com/sp/search?query=');
         break;
 
+        case 1:
+          setEngine("PrivAU");
+          setUrl('https://priv.au/search?q=');
+        break;
+
         case 2:
+          setEngine("RhsczEU");
+          setUrl('https://search.rhscz.eu/search?q=');
+        break;
+
+        case 3:
+          setEngine("YouTube");
+          setUrl('https://www.youtube.com/results?search_query=');
+        break;
+
+        case 4:
           setEngine("Google");
           setUrl('https://www.google.com/search?q=');
         break;
 
-        case 3:
+        case 5:
           setCount((count) => 0);
-          setEngine("PrivAU");
-          setUrl('https://priv.au/search?q=');
-        break;
+          setEngine("Yandex");
+          setUrl('https://yandex.com/search/?text=')
+          break;
 
         default:
           setEngine("ERROR");
           setUrl('');
       }
+
+      inputRef.current.focus();
     };
 
     const startTimer = (input) =>
@@ -138,7 +182,7 @@ function Search() {
 
   return (
     <>
-      <head><title>Search Page</title></head>
+      <title>Search Page</title>
       <header className='header'>
         <ul className='nav-links'>
           <li>
@@ -195,6 +239,10 @@ function Search() {
                     case "/crono":
                       window.location.href = "https://cronometer.com/";
                     break;
+
+                    case "/maps":
+                      window.location.href = "https://maps.google.com/";
+                    break;
                   
                     default:
                       
@@ -214,7 +262,7 @@ function Search() {
                 
                 } else if(e.key == "Tab") {
                   e.preventDefault();
-                  e.swapEngine();
+                  swapEngine();
                 }}}
             />
             <img className='smarker' src={smarker}></img>
@@ -224,9 +272,7 @@ function Search() {
         </div>
 
         {/* Help Button */}
-        <div className="help-card">
-          <Modal />
-        </div>
+        <HelpPopUp />
 
       </section>
 
